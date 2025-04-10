@@ -11,6 +11,8 @@ import AddCourse from './pages/educator/AddCourse'
 import StudentsEnrolled from './pages/educator/StudentsEnrolled'
 import MyCourses from './pages/educator/MyCourses'
 import Navbar from './components/student/Navbar'
+import LoginPage from './components/Auth/Login'
+import SignupPage from './components/Auth/Signup'
 
 
 const App = () => {
@@ -25,6 +27,8 @@ const App = () => {
         <Route path='/courseDetails' element={<CourseDetails/>}/>
         <Route path='/myEnrollment' element={<MyEnrollment/>}/>
         <Route path='/player' element={<Player/>}/>
+        <Route path='/login' element={<LoginPage/>}/>
+        <Route path='/signup' element={<SignupPage/>}/>
         <Route path='/educator' element={<Educator/>}>
             <Route path='dashboard' element={<Dashboard/>}/>
             <Route path='addCourse' element={<AddCourse/>}/>

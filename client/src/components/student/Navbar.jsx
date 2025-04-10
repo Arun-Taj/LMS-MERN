@@ -1,169 +1,161 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { HiMenu, HiX, HiSearch } from "react-icons/hi";
+import Book from "../../assets/Books.jpeg";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const { user, logout } = useContext(AuthContext);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
-    <nav className="bg-white shadow">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Left: Logo */}
+    <nav className="bg-white shadow-md py-3 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 ">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/">
-              {/* Replace '/logo.png' with your own logo file */}
-              <img className="h-8" src="/logo.png" alt="LMS Logo" />
+            <Link to="/" className="flex items-center">
+              <img className="h-10 w-auto" src={Book} alt="LMS Logo" />
             </Link>
           </div>
 
-          {/* Center: Search bar (visible on medium screens and up) */}
-          <div className="hidden md:block flex-1 px-4">
-            <div className="relative">
+          {/* Search Bar (visible on md screens and up) */}
+          <div className="hidden md:flex flex-1 mx-4 md:mx-8 max-w-xl">
+            <div className="relative w-full">
               <input
                 type="text"
-                placeholder="Search for anything"
-                className="w-full border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                placeholder="Search courses, subjects, ..."
+                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300"
               />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                <svg
-                  className="h-5 w-5 text-gray-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Navigation Items */}
-          <div className="flex items-center">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-4">
-              <Link
-                to="/categories"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-              >
-                Categories
-              </Link>
-              <Link
-                to="/instructors"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-              >
-                Instructors
-              </Link>
-              <Link
-                to="/my-courses"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-              >
-                My Learning
-              </Link>
-              <Link
-                to="/cart"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-              >
-                Cart
-              </Link>
-            </div>
-
-            {/* Authentication Buttons */}
-            <div className="hidden md:flex items-center ml-4">
-              <Link
-                to="/login"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-              >
-                Log In
-              </Link>
-              <Link
-                to="/signup"
-                className="ml-2 px-3 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-600 hover:text-white transition duration-300 text-sm font-medium"
-              >
-                Sign Up
-              </Link>
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden ml-4">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none"
-              >
-                <svg
-                  className="h-6 w-6"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  {isMobileMenuOpen ? (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  ) : (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  )}
-                </svg>
+              <button className="absolute right-3 top-2.5 text-gray-500 hover:text-blue-600 transition-colors duration-300">
+                <HiSearch className="h-5 w-5" />
               </button>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link
-              to="/categories"
-              className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium"
+          {/* Desktop Navigation Items */}
+          {user && (
+            <div className="hidden md:flex items-center space-x-6">
+              <Link
+                to="/educator"
+                className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
+              >
+                Become Educator
+              </Link>
+              <Link
+                to="/student"
+                className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
+              >
+                Student
+              </Link>
+            </div>
+          )}
+
+          {/* Right Section */}
+          <div className="flex items-center space-x-4">
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  className="flex items-center justify-center h-10 w-10 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                >
+                  {user.name.charAt(0).toUpperCase()}
+                </button>
+                {showDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-gray-100 z-50">
+                    <div className="px-4 py-2 text-sm text-gray-600 border-b border-gray-100">
+                      {user.email}
+                    </div>
+                    <button
+                      onClick={logout}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 text-left"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="hidden md:flex space-x-3">
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-gray-600 hover:text-blue-600 text-sm font-medium"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 text-sm font-medium transition-colors"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors"
             >
-              Categories
-            </Link>
-            <Link
-              to="/instructors"
-              className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Instructors
-            </Link>
-            <Link
-              to="/my-courses"
-              className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium"
-            >
-              My Learning
-            </Link>
-            <Link
-              to="/cart"
-              className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Cart
-            </Link>
-            <Link
-              to="/login"
-              className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Log In
-            </Link>
-            <Link
-              to="/signup"
-              className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Sign Up
-            </Link>
+              {isMobileMenuOpen ? (
+                <HiX className="h-6 w-6" />
+              ) : (
+                <HiMenu className="h-6 w-6" />
+              )}
+            </button>
           </div>
         </div>
-      )}
+
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? "max-h-screen pt-4" : "max-h-0"
+          }`}
+        >
+          <div className="px-4 pb-4 space-y-2 border-t border-gray-200">
+            {user ? (
+              <>
+                <Link
+                  to="/educator"
+                  onClick={toggleMobileMenu}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  Become Educator
+                </Link>
+                <Link
+                  to="/student"
+                  onClick={toggleMobileMenu}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  Student
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  onClick={toggleMobileMenu}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/signup"
+                  onClick={toggleMobileMenu}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </nav>
   );
 };
