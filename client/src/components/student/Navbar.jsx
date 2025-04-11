@@ -48,7 +48,7 @@ const Navbar = () => {
                 Become Educator
               </Link>
               <Link
-                to="/student"
+                to="/myEnrollment"
                 className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
               >
                 Student
@@ -128,7 +128,7 @@ const Navbar = () => {
                   Become Educator
                 </Link>
                 <Link
-                  to="/student"
+                  to="/myEnrollment"
                   onClick={toggleMobileMenu}
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
                 >
