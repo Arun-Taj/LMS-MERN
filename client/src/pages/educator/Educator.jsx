@@ -1,9 +1,10 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Dashboard from './Dashboard'
 const Educator = () => {
   return (
     <div>
-      Educator
+      <Dashboard/>
       <div>
         {<Outlet/>}
       </div>
