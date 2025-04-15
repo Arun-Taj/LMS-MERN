@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import CourseCard from "./CourseCard";
 import Features from "./Features";
 import Footer from "./Footer";
 import Companies from "./Companies";
+import Testimonial from "./Testominal";
 const Hero = () => {
   const { user } = useContext(AuthContext);
 
@@ -51,9 +52,10 @@ const Hero = () => {
                 Learn New Skills Online
               </h1>
               <p className="text-xl md:text-2xl mb-8 max-w-2xl">
-                Join millions of students and gain access to thousands of courses on technology, business, design, and more.
+                Join millions of students and gain access to thousands of
+                courses on technology, business, design, and more.
               </p>
-              
+
               <Link
                 to="/signup"
                 className="inline-block bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold py-3 px-8 rounded-full"
@@ -66,17 +68,18 @@ const Hero = () => {
       </section>
 
       <section>
-        <CourseCard/>
+        <CourseCard />
       </section>
       <section>
-        <Features/>
-        <Companies/>
+        <Features />
+        <Companies />
       </section>
       <section>
-        <Footer/>
+        <Testimonial />
       </section>
-
-      
+      <section>
+        <Footer />
+      </section>
     </div>
   );
 };

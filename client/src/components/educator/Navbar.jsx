@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaUserCircle, FaBell, FaChalkboardTeacher, FaSignOutAlt, FaCog } from 'react-icons/fa';
 import { FiChevronDown } from 'react-icons/fi';
-
+import Logo from '../../assets/Edu-Logo.png'
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [unreadNotifications] = useState(3); // Replace with actual notification count

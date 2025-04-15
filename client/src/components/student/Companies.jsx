@@ -39,9 +39,9 @@ const Companies = () => {
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
             Trusted by the World's Best Companies
           </h2>
-          <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+          {/* <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
             Join thousands of organizations who partner with us to transform their business
-          </p>
+          </p> */}
         </div>
 
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8">
@@ -64,11 +64,11 @@ const Companies = () => {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        {/* <div className="mt-12 text-center">
           <p className="text-lg text-gray-600">
             Join 500+ companies already growing with us
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
