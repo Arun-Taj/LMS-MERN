@@ -1,29 +1,28 @@
 import React, { useState, useContext } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiMenu, HiX, HiSearch } from "react-icons/hi";
-import Book from "../../assets/Books.jpeg";
-import Logo from '../../assets/Edu-Logo.png'
+
+import Logo from "../../assets/Logo.png";
 import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const { user, logout } = useContext(AuthContext);
-  const [searchQuery,setSearchQuery]=useState('')
-  const navigate=useNavigate()
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleSearchSubmit=(e)=>{
-    e.preventDefault()
-    const trimmedQuery=searchQuery.trim()
-    if(trimmedQuery !==''){
-      navigate(`/search?query=${encodeURIComponent(trimmedQuery)}`)
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const trimmedQuery = searchQuery.trim();
+    if (trimmedQuery !== "") {
+      navigate(`/search?query=${encodeURIComponent(trimmedQuery)}`);
     }
-  }
+  };
 
   return (
     <nav className="bg-white shadow-md py-3 sticky top-0 z-50">
@@ -32,13 +31,17 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <img className="h-16 w-auto" src={Logo} alt="LMS Logo" />
+              <img
+                className="h-20 w-auto object-contain transform scale-125"
+                src={Logo}
+                alt="LMS Logo"
+              />
             </Link>
           </div>
 
           {/* Search Bar (visible on md screens and up) */}
-          <div className="hidden md:flex flex-1 mx-4 md:mx-8 max-w-xl">
-          <form onSubmit={handleSearchSubmit} className="w-full">
+          <div className="flex flex-1 mx-4 md:mx-8 max-w-xl">
+            <form onSubmit={handleSearchSubmit} className="w-full">
               <div className="relative w-full">
                 <input
                   type="text"

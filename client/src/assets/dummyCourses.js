@@ -11,7 +11,27 @@ const courses = [
       duration: '32 hours',
       image: 'https://cdn.pixabay.com/photo/2019/10/09/07/28/development-4536630_1280.png',
       bestSeller: true,
-      new: false
+      new: false,
+      previewVideo: 'https://www.w3schools.com/html/mov_bbb.mp4', // sample video URL
+      curriculum: [
+        {
+          sectionTitle: "Introduction",
+          lessons: [
+            "Welcome to the Course",
+            "Course Overview",
+            "What You'll Learn"
+          ]
+        },
+        {
+          sectionTitle: "Fundamentals",
+          lessons: [
+            "HTML Basics",
+            "CSS Essentials",
+            "JavaScript Introduction"
+          ]
+        },
+        // Add more sections as needed
+      ]
     },
     {
       id: 2,

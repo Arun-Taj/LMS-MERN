@@ -6,6 +6,7 @@ import Features from "./Features";
 import Footer from "./Footer";
 import Companies from "./Companies";
 import Testimonial from "./Testominal";
+import CoursesSection from "./CoursesSection";
 const Hero = () => {
   const { user } = useContext(AuthContext);
 
@@ -68,7 +69,7 @@ const Hero = () => {
       </section>
 
       <section>
-        <CourseCard />
+        <CoursesSection/>
       </section>
       <section>
         <Features />

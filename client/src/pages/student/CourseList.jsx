@@ -23,6 +23,7 @@ const CourseList = () => {
 
   // Optionally, display a message if no matches are found
   const noResults = coursesToDisplay.length === 0 && searchQuery.trim() !== "";
+  
 
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8">
@@ -41,7 +42,7 @@ const CourseList = () => {
           {coursesToDisplay.map((course) => {
             // Calculate original price if a discount exists
             const originalPrice = course.discount > 0 ? course.price / (1 - course.discount / 100) : course.price;
-  
+            console.log("Course ID:", course.id);
             return (
               <div
                 key={course.id}

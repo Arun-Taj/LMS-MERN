@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, useMatch } from 'react-router-dom'
+import { Route, Routes, useMatch, Navigate } from 'react-router-dom'
 import Home from './pages/student/Home'
 import CourseList from './pages/student/CourseList'
 import CourseDetails from './pages/student/CourseDetails'
@@ -25,7 +25,10 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path='/courseList' element={<CourseList/>}/>
         <Route path='/search' element={<CourseList/>}/>
-        <Route path='/courseDetails' element={<CourseDetails/>}/>
+       {/* Correct usage of a dynamic parameter */}
+       <Route path='/courseDetails/:id' element={<CourseDetails />} />
+        {/* Fallback route for /courseDetails without id */}
+        <Route path='/courseDetails' element={<Navigate to="/courseList" replace />} />
         <Route path='/myEnrollment' element={<MyEnrollment/>}/>
         <Route path='/player' element={<Player/>}/>
         <Route path='/login' element={<LoginPage/>}/>
