@@ -1,6 +1,8 @@
 import React, { createContext,useContext,useState,useEffect } from "react";
 import { getMe } from "../components/services/api";
 import dummyCourses from '../assets/dummyCourses'
+
+
 export const AuthContext=createContext()
 
 export const AuthContextProvider=(props)=>{
@@ -34,19 +36,19 @@ export const AuthContextProvider=(props)=>{
 
   const [allCourses,setAllCourses]=useState([])
 
-  const   fetchAllCourses=async()=>{
+  const fetchAllCourses=async()=>{
     setAllCourses(dummyCourses)
   }
+
   useEffect(()=>{
-    fetchAllCourses
-  })
-    const value={
-      allCourses
-    }
+    fetchAllCourses()
+  },[])
+
+  const value = { user, loading, allCourses, login, logout };
 
 
     return(
-        <AuthContext.Provider value={{ value,user, login, logout, loading }}>
+        <AuthContext.Provider value={value}>
             {props.children}
         </AuthContext.Provider>
     )

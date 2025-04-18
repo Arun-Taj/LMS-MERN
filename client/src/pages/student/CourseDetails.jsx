@@ -1,160 +1,217 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import courses from "../../assets/dummyCourses"; // Adjust path as needed
-import { FaStar } from "react-icons/fa";
+import React, { useContext, useEffect, useState, useMemo } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import {
+  FaStar,
+  FaChevronRight,
+  FaHeart,
+  FaShareAlt,
+  FaPlay,
+  FaClock,
+  FaList,
+  FaTags,
+  FaUsers,
+  FaCalendarAlt,
+  FaArrowLeft
+} from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const CourseDetails = () => {
   const { id } = useParams();
-  // Find the course by comparing the id from the URL
-  const course = courses.find((course) => String(course.id) === id);
-  const [activeTab, setActiveTab] = useState("overview"); // "overview", "curriculum", or "reviews"
+  const { allCourses } = useContext(AuthContext);
+  const [course, setCourse] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState('');
+  const [isEnrolled, setIsEnrolled] = useState(false);
 
-  // If no course is found, display an error message
+  useEffect(() => {
+    const found = allCourses.find(c => c.id === parseInt(id));
+    if (found) {
+      setCourse(found);
+      setSelectedVideo(found.courseContent[0]?.lectureUrl || '');
+    }
+  }, [allCourses, id]);
+
+  const totalLectures = useMemo(
+    () => course?.courseContent.reduce((sum, chap) => sum + chap.chapterContent.length, 0),
+    [course]
+  );
+  const totalMinutes = useMemo(
+    () =>
+      course?.courseContent.reduce(
+        (sum, chap) => sum + chap.chapterContent.reduce((s, lec) => s + lec.lectureDuration, 0),
+        0
+      ),
+    [course]
+  );
+  const totalHours = (totalMinutes / 60).toFixed(1);
+  const averageRating = useMemo(() => {
+    if (!course?.courseRatings?.length) return course?.rating;
+    const sum = course.courseRatings.reduce((s, r) => s + r.rating, 0);
+    return (sum / course.courseRatings.length).toFixed(1);
+  }, [course]);
+  const enrolledCount = course?.enrolledStudents.length || 0;
+  const discountedPrice = (course?.price * (100 - course?.discount) / 100).toFixed(2);
+
   if (!course) {
-    return (
-      <div className="max-w-5xl mx-auto p-4">
-        <h2 className="text-2xl font-bold text-red-600">Course not found</h2>
-      </div>
-    );
+    return <div className="text-center py-10 text-gray-600">Loading course details...</div>;
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-4">
-      {/* Top Overview Section */}
-      <div className="flex flex-col md:flex-row border-b pb-4">
-        {/* Left: Course Image & Preview Video */}
-        <div className="md:w-1/2">
-          <img
-            src={course.image}
-            alt={course.title}
-            className="w-full h-auto object-cover rounded-lg"
-          />
-          {course.previewVideo && (
-            <div className="mt-4">
-              <video 
-                src={course.previewVideo} 
-                controls 
-                className="w-full rounded-lg"
-              />
-            </div>
-          )}
-        </div>
-        {/* Right: Course Info */}
-        <div className="md:ml-6 mt-4 md:mt-0 md:w-1/2">
-          <h1 className="text-3xl font-bold">{course.title}</h1>
-          <p className="text-gray-600 mt-2">By {course.instructor}</p>
-          <div className="flex items-center mt-2">
-            <div className="flex text-yellow-400">
-              {[...Array(5)].map((_, i) => (
-                <FaStar
-                  key={i}
-                  className={i < Math.floor(course.rating) ? "fill-current" : "fill-gray-300"}
-                />
-              ))}
-            </div>
-            <span className="ml-2 text-sm text-gray-600">
-              ({course.reviews} reviews)
-            </span>
-          </div>
-          <div className="mt-4">
-            <p className="text-gray-700">
-              {course.description || "No detailed description provided yet."}
-            </p>
-          </div>
-          <div className="mt-4">
-            <span className="text-xl font-bold">
-              ${course.price.toFixed(2)}
-            </span>
-            {course.discount > 0 && (
-              <span className="ml-2 text-sm text-gray-500 line-through">
-                ${(course.price / (1 - course.discount / 100)).toFixed(2)}
-              </span>
+    <div className="container mx-auto px-6 py-8 max-w-7xl">
+      <Link to="/courseList" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-4">
+        <FaArrowLeft className="mr-2" /> Back to Courses
+      </Link>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="relative w-full rounded-xl overflow-hidden shadow-lg aspect-video"
+          >
+            <video
+            key={selectedVideo}
+              src={selectedVideo}
+              poster={course.image}
+              controls
+              className="w-full h-full object-cover"
+            />
+            {!isEnrolled && (
+              <button
+                onClick={() => setIsEnrolled(true)}
+                className="absolute bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-green-700 transition"
+              >
+                Enroll Now
+              </button>
             )}
+          </motion.div>
+
+          <div className="space-y-6">
+            <motion.header
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="space-y-2"
+            >
+              <h1 className="text-4xl font-extrabold text-gray-900 flex items-center">
+                {course.title}
+                {course.bestSeller && <span className="ml-4 bg-yellow-300 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full">Bestseller</span>}
+                {course.new && <span className="ml-2 bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded-full">New</span>}
+              </h1>
+              <div className="flex flex-wrap items-center text-gray-500 gap-4">
+                <div className="flex items-center"><FaStar className="text-yellow-500 mr-1" /> {averageRating} ({course.reviews} reviews)</div>
+                <div className="flex items-center"><FaUsers className="mr-1" /> {enrolledCount} students</div>
+                <div className="flex items-center"><FaCalendarAlt className="mr-1" /> {new Date(course.createdAt).toLocaleDateString()}</div>
+                {!course.isPublished && <span className="px-2 py-1 bg-red-100 text-red-700 text-sm rounded">Draft</span>}
+              </div>
+            </motion.header>
+
+            <motion.section
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="prose prose-lg max-w-none bg-gray-50 rounded-xl p-8"
+            >
+              <h2>About this Course</h2>
+              <div dangerouslySetInnerHTML={{ __html: course.courseDescription }} />
+            </motion.section>
+
+            <motion.section
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="bg-white rounded-xl shadow p-6"
+            >
+              <h2 className="text-2xl font-bold mb-4">Curriculum</h2>
+              {course.courseContent.map(ch => (
+                <AnimatePresence key={ch.chapterId}>
+                  <motion.details
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="group border-b last:border-none pb-4 mb-4"
+                  >
+                    <summary className="flex justify-between items-center cursor-pointer py-2 font-medium">
+                      <span>Chapter {ch.chapterOrder}: {ch.chapterTitle}</span>
+                      <FaChevronRight className="transform group-open:rotate-90 transition" />
+                    </summary>
+                    <ul className="mt-4 space-y-2">
+                      {ch.chapterContent.map(lec => (
+                        <li
+                          key={lec.lectureId}
+                          onClick={() => lec.isPreviewFree && setSelectedVideo(lec.lectureUrl)}
+                          className={`flex justify-between items-center p-3 rounded-lg hover:bg-gray-100 transition ${lec.isPreviewFree ? 'cursor-pointer' : 'opacity-50'}`}
+                        >
+                          <div className="flex items-center gap-3">
+                            {lec.isPreviewFree ? <FaPlay className="text-green-600" /> : <div className="w-4 h-4 bg-gray-300 rounded-full" />}
+                            <span>{lec.lectureOrder}. {lec.lectureTitle}</span>
+                          </div>
+                          <span className="text-sm text-gray-500">{lec.lectureDuration} min</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.details>
+                </AnimatePresence>
+              ))}
+            </motion.section>
           </div>
-          <button className="mt-6 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors">
-            Enroll Now
-          </button>
-        </div>
-      </div>
-
-      {/* Tab Navigation */}
-      <div className="mt-8">
-        <div className="border-b">
-          <nav className="flex space-x-4">
-            <button
-              onClick={() => setActiveTab("overview")}
-              className={`pb-2 focus:outline-none ${
-                activeTab === "overview"
-                  ? "border-b-2 border-blue-600 text-blue-600"
-                  : "text-gray-600"
-              }`}
-            >
-              Overview
-            </button>
-            <button
-              onClick={() => setActiveTab("curriculum")}
-              className={`pb-2 focus:outline-none ${
-                activeTab === "curriculum"
-                  ? "border-b-2 border-blue-600 text-blue-600"
-                  : "text-gray-600"
-              }`}
-            >
-              Curriculum
-            </button>
-            <button
-              onClick={() => setActiveTab("reviews")}
-              className={`pb-2 focus:outline-none ${
-                activeTab === "reviews"
-                  ? "border-b-2 border-blue-600 text-blue-600"
-                  : "text-gray-600"
-              }`}
-            >
-              Reviews
-            </button>
-          </nav>
         </div>
 
-        {/* Tab Content */}
-        <div className="mt-6">
-          {activeTab === "overview" && (
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Course Overview</h2>
-              <p className="text-gray-700">
-                {course.fullDescription || course.description || "No additional overview available."}
-              </p>
+        <aside className="space-y-8 sticky top-20">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="border border-gray-200 rounded-2xl p-6 bg-white shadow-lg"
+          >
+            <h3 className="text-xl font-semibold mb-4">Purchase</h3>
+            <div className="flex items-baseline gap-3 mb-4">
+              <span className="text-3xl font-bold text-gray-900">${discountedPrice}</span>
+              <span className="text-sm text-gray-500 line-through">${course.price.toFixed(2)}</span>
             </div>
-          )}
-          {activeTab === "curriculum" && (
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Course Curriculum</h2>
-              {course.curriculum && course.curriculum.length > 0 ? (
-                <div className="space-y-4">
-                  {course.curriculum.map((section, index) => (
-                    <div key={index} className="border rounded-md p-4">
-                      <h3 className="font-semibold text-xl mb-2">
-                        {section.sectionTitle}
-                      </h3>
-                      <ul className="list-disc list-inside">
-                        {section.lessons.map((lesson, idx) => (
-                          <li key={idx}>{lesson}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-700">No curriculum data available.</p>
-              )}
+            <button
+              onClick={() => setIsEnrolled(true)}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition"
+            >
+              {isEnrolled ? 'Enrolled' : 'Enroll Now'}
+            </button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="border border-gray-200 rounded-2xl p-6 bg-white shadow-lg"
+          >
+            <h3 className="text-xl font-semibold mb-4">Instructor</h3>
+            <div className="flex items-center gap-4">
+              <img
+                src={course.instructorImage || 'https://cdn.pixabay.com/photo/2024/09/12/21/20/ai-generated-9043367_960_720.png'}
+                alt={course.instructor}
+                className="w-16 h-16 rounded-full object-cover"
+              />
+              <div>
+                <p className="font-semibold text-gray-900">{course.instructor}</p>
+                <p className="text-gray-500 text-sm mt-1">Senior Developer & Educator</p>
+              </div>
             </div>
-          )}
-          {activeTab === "reviews" && (
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Course Reviews</h2>
-              {/* Replace with dynamic review content in a real app */}
-              <p className="text-gray-700">No reviews yet. Be the first to review this course!</p>
-            </div>
-          )}
-        </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="flex flex-col gap-3"
+          >
+            <button className="w-full flex items-center justify-center gap-2 border border-gray-200 py-3 rounded-lg hover:bg-gray-100 transition">
+              <FaHeart className="text-red-500" /> Add to Wishlist
+            </button>
+            <button className="w-full flex items-center justify-center gap-2 border border-gray-200 py-3 rounded-lg hover:bg-gray-100 transition">
+              <FaShareAlt className="text-blue-500" /> Share Course
+            </button>
+          </motion.div>
+        </aside>
       </div>
     </div>
   );
