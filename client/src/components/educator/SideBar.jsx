@@ -1,19 +1,34 @@
 import React from 'react'
-
+import { FiHome } from "react-icons/fi";
+import { FaBook } from "react-icons/fa";
+import { FaBookMedical } from "react-icons/fa";
+import { FaUserGraduate } from "react-icons/fa6";
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { NavLink } from 'react-router-dom';
 const SideBar = () => {
-  return (
-    
-      <div className="w-1/5 border-r border-gray-300 pr-3">
-          <h3 className="text-lg font-semibold">Menu</h3>
-          <ul className="list-none p-0 space-y-2">
-            <li><a href="/courses" className="text-blue-500 hover:underline">My Courses</a></li>
-            <li><a href="/students" className="text-blue-500 hover:underline">Students</a></li>
-            <li><a href="/assignments" className="text-blue-500 hover:underline">Assignments</a></li>
-            <li><a href="/profile" className="text-blue-500 hover:underline">Profile</a></li>
-            <li><a href="/settings" className="text-blue-500 hover:underline">Settings</a></li>
-          </ul>
-        </div>
-  
+
+  const {isEducatorRoute}=useContext(AuthContext)
+
+  const menuItems=[
+    {name:"Dashboard", path:"/educator",icon:<FiHome />},
+    {name:"Add Course", path:"/educator/addCourse",icon:<FaBookMedical />},
+    {name:"My Courses", path:"/educator/myCourse",icon:<FaBook />},
+    {name:"Student Enrolled", path:"/educator/studentEnrolled",icon:<FaUserGraduate />}
+
+  ]
+  return isEducatorRoute && (
+    <div className='md:w-64 w-16 border-r min-h-screen text-base border-gray-500 py-2 flex flex-col'>
+      {menuItems.map((item)=>(
+          <NavLink
+          to={item.path}
+          key={item.name}
+          end={item.path==='/educator'}>
+            <img src={item.icon} alt="" className='w-6 h-6'/>
+            <p className='md:block hidden text-center'>{item.name}</p>
+          </NavLink>
+      ))}
+    </div>
   )
 }
 
