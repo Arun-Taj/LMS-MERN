@@ -30,7 +30,7 @@ const App = () => {
         {/* Fallback route for /courseDetails without id */}
         <Route path='/courseDetails' element={<Navigate to="/courseList" replace />} />
         <Route path='/myEnrollment' element={<MyEnrollment/>}/>
-        <Route path='/player' element={<Player/>}/>
+        <Route path='/player/:id' element={<Player/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/signup' element={<SignupPage/>}/>
         <Route path='/educator' element={<Educator/>}>

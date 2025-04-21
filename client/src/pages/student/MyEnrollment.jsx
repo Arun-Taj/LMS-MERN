@@ -102,7 +102,7 @@ const MyEnrollment = () => {
                 
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
-                  <button className="p-2 rounded-full hover:bg-gray-200" onClick={()=>navigate('/player' + course._id)}>
+                  <button className="p-2 rounded-full hover:bg-gray-200" onClick={() => navigate(`/player/${course.id}`)}>
                     <HiChevronRight className="w-5 h-5 text-gray-500" />
                   </button>
                 </td>
