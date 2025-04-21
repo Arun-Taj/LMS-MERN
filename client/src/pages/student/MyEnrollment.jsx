@@ -1,9 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { HiSearch, HiChevronRight, HiAcademicCap, HiClock, HiCheckCircle } from 'react-icons/hi'
+import {Line} from 'rc-progress'
+import Footer from '../../components/student/Footer'
+
+
 
 const MyEnrollment = () => {
-  const { enrolledCourses, totalHours } = useContext(AuthContext)
+  const { enrolledCourses, totalHours,navigate } = useContext(AuthContext)
   const [searchTerm, setSearchTerm] = useState('')
 
   const filteredCourses = enrolledCourses.filter(course =>
@@ -11,6 +15,8 @@ const MyEnrollment = () => {
   )
 
   const completedCount = enrolledCourses.filter(course => course.status === 'Completed').length
+
+  
 
   const [progressArray,setProgressArray]=useState([
     { lectureCompleted: 2, totalLectures: 5 },
@@ -26,6 +32,7 @@ const MyEnrollment = () => {
   ])
 
   return (
+    <>
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -79,7 +86,9 @@ const MyEnrollment = () => {
                     alt={course.title}
                     className="w-14 h-14 rounded-md shadow mr-4"
                   />
-                  <span className="text-sm font-medium text-gray-800">{course.title}</span>
+                  <span className="text-sm font-medium text-gray-800">{course.title}
+                    <Line strokeWidth={2} percent={progressArray[idx] ? (progressArray[idx].lectureCompleted * 100)/(progressArray[idx].totalLectures):0 } className='bg-gray-300 rounded-full'/>
+                  </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{course.duration}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -93,7 +102,7 @@ const MyEnrollment = () => {
                 
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
-                  <button className="p-2 rounded-full hover:bg-gray-200">
+                  <button className="p-2 rounded-full hover:bg-gray-200" onClick={()=>navigate('/player' + course._id)}>
                     <HiChevronRight className="w-5 h-5 text-gray-500" />
                   </button>
                 </td>
@@ -102,7 +111,10 @@ const MyEnrollment = () => {
           </tbody>
         </table>
       </div>
+      
     </div>
+    <Footer/>
+    </>
   )
 }
 

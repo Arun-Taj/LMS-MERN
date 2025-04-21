@@ -7,12 +7,15 @@ import React, {
 } from "react";
 import { getMe } from "../components/services/api";
 import dummyCourses from "../assets/dummyCourses";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = (props) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const navigate=useNavigate()
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -127,6 +130,7 @@ export const AuthContextProvider = (props) => {
   const value = {
     user,
     setIsEducator,
+    navigate,
     loading,
     allCourses,
     selectedCourse,
