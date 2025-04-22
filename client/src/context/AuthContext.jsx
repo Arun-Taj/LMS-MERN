@@ -90,13 +90,20 @@ export const AuthContextProvider = (props) => {
     [totalMinutes]
   );
 
-  const averageRating = useMemo(() => {
-    if (!selectedCourse) return 0;
-    if (!selectedCourse.courseRatings?.length)
-      return selectedCourse.rating || 0;
-    const sum = selectedCourse.courseRatings.reduce((s, r) => s + r.rating, 0);
-    return (sum / selectedCourse.courseRatings.length).toFixed(1);
-  }, [selectedCourse]);
+  // const averageRating = useMemo(() => {
+  //   if (!selectedCourse) return 0;
+  //   if (!selectedCourse.courseRatings?.length)
+  //     return selectedCourse.rating || 0;
+  //   const sum = selectedCourse.courseRatings.reduce((s, r) => s + r.rating, 0);
+  //   return (sum / selectedCourse.courseRatings.length).toFixed(1);
+  // }, [selectedCourse]);
+
+  const averageRating=(course)=>{
+    if (!course) return 0;
+    if (!course.courseRatings?.length) return course.rating || 0;
+    const sum = course.courseRatings.reduce((s, r) => s + r.rating, 0);
+    return Number((sum / course.courseRatings.length).toFixed(1));
+  }
 
   const enrolledCount = useMemo(
     () => selectedCourse?.enrolledStudents.length || 0,

@@ -4,17 +4,17 @@ const courses = [
     title: 'Web Development Bootcamp',
     courseDescription: "<h2>Learn the Basics of JavaScript</h2><p>JavaScript is a versatile programming language that powers the web. In this course, you will learn the fundamentals of JavaScript, including syntax, data types, and control structures.</p><p>This course is perfect for beginners who want to start their journey in web development. By the end of this course, you will be able to create interactive web pages and understand the core concepts of JavaScript.</p><ul><li>Understand the basics of programming</li><li>Learn how to manipulate the DOM</li><li>Create dynamic web applications</li></ul>",
     instructor: 'John Doe',
-    rating: 4.8,
+    // rating: 4.8,
     reviews: 1254,
     price: 89.99,
     discount: 10,
     category: 'Programming',
     duration: 32,
-    image: 'https://cdn.pixabay.com/photo/2019/10/09/07/28/development-4536630_1280.png',
+    
     bestSeller: true,
     new: false,
     isPublished: true,
-    // previewVideo: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    
     courseContent: [
       {
         chapterId: 'chapter1',
@@ -38,28 +38,29 @@ const courses = [
     educator: '675ac1512100b91a6d9b8b24',
     enrolledStudents: ['user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V','user_2qjlgkAqIMpiR2flWIRzvWKtE0w','user_3hKgB19KjvY12L5aTn4FoJ3m'],
     courseRatings: [
-      { userId: 'user_2qjlgkAqIMpiR2flWIRzvWKtE0w', rating: 5, _id: '6773e37360cb0ab974342314' },
-      { userId: 'user_3hKgB19KjvY12L5aTn4FoJ3m', rating: 4, _id: '6784f28371db1bb885453425' }
+      { userId: 'user_2qjlgkAqIMpiR2flWIRzvWKtE0w', rating: 2, _id: '6773e37360cb0ab974342314' },
+      { userId: 'user_3hKgB19KjvY12L5aTn4FoJ3m', rating: 2, _id: '6784f28371db1bb885453425' }
     ],
     createdAt: '2024-12-17T08:16:53.622Z',
-    updatedAt: '2025-01-02T04:47:44.701Z'
+    updatedAt: '2025-01-02T04:47:44.701Z',
+    image: 'https://cdn.pixabay.com/photo/2019/10/09/07/28/development-4536630_1280.png',
   },
   {
     id: 2,
     title: 'Graphic Design Masterclass',
     courseDescription: "<h2>Master the Art of Visual Communication</h2><p>In this comprehensive course, you'll learn essential graphic design principles, from color theory to typography. Perfect for aspiring designers and marketers looking to elevate their visual content.</p><ul><li>Fundamentals of design theory</li><li>Working with Adobe Photoshop and Illustrator</li><li>Creating brand identities</li></ul>",
     instructor: 'Jane Smith',
-    rating: 4.6,
+    // rating: 4.6,
     reviews: 987,
     price: 69.99,
     discount: 15,
     category: 'Design',
     duration: 24,
-    image: 'https://cdn.pixabay.com/photo/2012/09/29/20/43/graphic-58495_960_720.jpg',
+   
     bestSeller: false,
     new: true,
     isPublished: true,
-    previewVideo: 'https://www.example.com/preview-graphic-design.mp4',
+    // previewVideo: 'https://www.example.com/preview-graphic-design.mp4',
     courseContent: [
       {
         chapterId: 'gdm_chap1',
@@ -83,28 +84,29 @@ const courses = [
     educator: '784bd2623211c82b7e5a9c35',
     enrolledStudents: ['user_4jKlM29LpXyZ2V7bYn5QpK4r','user_6tMnN38QqXpW3X9dCu6RrL5','user_1xAbC47DeRfT8GhIj9KlM0'],
     courseRatings: [
-      { userId: 'user_4jKlM29LpXyZ2V7bYn5QpK4r', rating: 5, _id: '6795g39482ec2cc996564536' },
-      { userId: 'user_6tMnN38QqXpW3X9dCu6RrL5', rating: 4, _id: '67a6h4a593fd3dda77567547' }
+      { userId: 'user_4jKlM29LpXyZ2V7bYn5QpK4r', rating: 1, _id: '6795g39482ec2cc996564536' },
+      { userId: 'user_6tMnN38QqXpW3X9dCu6RrL5', rating: 2, _id: '67a6h4a593fd3dda77567547' }
     ],
     createdAt: '2024-11-05T10:12:30.000Z',
-    updatedAt: '2025-02-20T14:22:11.000Z'
+    updatedAt: '2025-02-20T14:22:11.000Z',
+     image: 'https://cdn.pixabay.com/photo/2012/09/29/20/43/graphic-58495_960_720.jpg',
   },
   {
     id: 3,
     title: 'Data Science Fundamentals',
     courseDescription: "<h2>Kickstart Your Data Science Journey</h2><p>Learn data analysis, visualization, and machine learning basics using Python. This course is designed for beginners looking to enter the world of data science.</p><ul><li>Pandas and NumPy for data manipulation</li><li>Matplotlib and Seaborn for visualization</li><li>Introduction to machine learning</li></ul>",
     instructor: 'Alice Johnson',
-    rating: 4.7,
+    // rating: 4.7,
     reviews: 1123,
     price: 99.99,
     discount: 20,
     category: 'Data Science',
     duration: 40,
-    image: 'https://cdn.pixabay.com/photo/2024/08/20/13/21/artificial-intelligence-8983285_960_720.jpg',
+   
     bestSeller: true,
     new: true,
     isPublished: true,
-    previewVideo: 'https://www.example.com/preview-data-science.mp4',
+    // previewVideo: 'https://www.example.com/preview-data-science.mp4',
     courseContent: [
       {
         chapterId: 'ds_chap1',
@@ -132,24 +134,25 @@ const courses = [
       { userId: 'user_5vNmQ67RuUvZ5Y2bVq8WsO3', rating: 4, _id: '67c8j6c7b5hf5ffc99789769' }
     ],
     createdAt: '2024-10-12T09:45:00.000Z',
-    updatedAt: '2025-03-15T11:34:22.000Z'
+    updatedAt: '2025-03-15T11:34:22.000Z',
+     image: 'https://cdn.pixabay.com/photo/2024/08/20/13/21/artificial-intelligence-8983285_960_720.jpg',
   },
   {
     id: 4,
     title: 'Cybersecurity Essentials',
     courseDescription: "<h2>Protect Systems and Networks</h2><p>This course covers fundamental cybersecurity concepts, including threat analysis, secure network design, and basic ethical hacking techniques.</p><ul><li>Network security principles</li><li>Vulnerability assessment</li><li>Introduction to penetration testing</li></ul>",
     instructor: 'Michael Lee',
-    rating: 4.5,
+    // rating: 1.5,
     reviews: 876,
     price: 79.99,
     discount: 25,
     category: 'Security',
     duration: 35,
-    image: 'https://cdn.pixabay.com/photo/2018/01/28/00/11/hacking-3112539_1280.png',
+    
     bestSeller: false,
     new: false,
     isPublished: true,
-    previewVideo: 'https://www.example.com/preview-cybersecurity.mp4',
+    // previewVideo: 'https://www.example.com/preview-cybersecurity.mp4',
     courseContent: [
       {
         chapterId: 'cyb_chap1',
@@ -177,24 +180,25 @@ const courses = [
       { userId: 'user_2aAbC90UyVwC8Z5zYt1WrM4', rating: 4, _id: '67eal8e9d7jh7hhdbb909091' }
     ],
     createdAt: '2024-09-20T13:20:10.000Z',
-    updatedAt: '2025-02-10T16:45:30.000Z'
+    updatedAt: '2025-02-10T16:45:30.000Z',
+    image: 'https://cdn.pixabay.com/photo/2018/01/28/00/11/hacking-3112539_1280.png',
   },
   {
     id: 5,
     title: 'Mobile App Development',
     courseDescription: "<h2>Build Cross-Platform Mobile Apps</h2><p>Learn how to develop mobile applications using React Native. Explore component-based development and native APIs to build performant apps.</p><ul><li>React Native fundamentals</li><li>State management with Redux</li><li>Integrating native modules</li></ul>",
     instructor: 'Emily Davis',
-    rating: 4.9,
-    reviews: 1456,
+    // rating: 2.9,
+    reviews: 14,
     price: 109.99,
     discount: 30,
     category: 'Programming',
     duration: 45,
-    image: 'https://cdn.pixabay.com/photo/2018/11/28/11/03/coffee-3843382_960_720.jpg',
+    
     bestSeller: true,
     new: false,
     isPublished: true,
-    previewVideo: 'https://www.example.com/preview-mobile-dev.mp4',
+    // previewVideo: 'https://www.example.com/preview-mobile-dev.mp4',
     courseContent: [
       {
         chapterId: 'mob_chap1',
@@ -222,24 +226,25 @@ const courses = [
       { userId: 'user_5dDeE23XyWyF2D8cZm4MnO9', rating: 5, _id: '67gbl0g1f9lj9jjfcc121213' }
     ],
     createdAt: '2024-08-15T11:30:00.000Z',
-    updatedAt: '2025-03-05T09:15:45.000Z'
+    updatedAt: '2025-03-05T09:15:45.000Z',
+    image: 'https://cdn.pixabay.com/photo/2018/11/28/11/03/coffee-3843382_960_720.jpg',
   },
   {
     id: 6,
     title: 'UI/UX Design Crash Course',
     courseDescription: "<h2>Design Engaging User Experiences</h2><p>Quickly learn the essentials of UI/UX design, including wireframing, prototyping, and usability testing. Perfect for busy professionals.</p><ul><li>Wireframing with Figma</li><li>Interactive prototyping</li><li>Conducting user tests</li></ul>",
     instructor: 'Chris Martin',
-    rating: 4.4,
+    // rating: 4.4,
     reviews: 654,
     price: 59.99,
     discount: 0,
     category: 'Design',
     duration: 20,
-    image: 'https://cdn.pixabay.com/photo/2015/05/28/14/53/ux-788002_1280.jpg',
+    
     bestSeller: false,
     new: true,
     isPublished: true,
-    previewVideo: 'https://www.example.com/preview-uiux.mp4',
+    // previewVideo: 'https://www.example.com/preview-uiux.mp4',
     courseContent: [
       {
         chapterId: 'ux_chap1',
@@ -267,24 +272,25 @@ const courses = [
       { userId: 'user_8gGgH56ZlAzI5F1fCn7PqS2', rating: 5, _id: '67icn2i3h1nl1llhee141435' }
     ],
     createdAt: '2024-07-10T12:00:00.000Z',
-    updatedAt: '2025-01-28T10:20:10.000Z'
+    updatedAt: '2025-01-28T10:20:10.000Z',
+    image: 'https://cdn.pixabay.com/photo/2015/05/28/14/53/ux-788002_1280.jpg',
   },
   {
     id: 7,
     title: 'Digital Marketing Strategies',
     courseDescription: "<h2>Boost Your Online Presence</h2><p>Explore key digital marketing channels including SEO, social media, and email marketing. Learn strategies to grow your brand and drive sales.</p><ul><li>Search engine optimization</li><li>Social media campaigns</li><li>Email marketing basics</li></ul>",
     instructor: 'Sophia Rodriguez',
-    rating: 4.6,
+    // rating: 4.6,
     reviews: 800,
     price: 69.99,
     discount: 10,
     category: 'Marketing',
     duration: 32,
-    image: 'https://cdn.pixabay.com/photo/2016/10/09/08/32/digital-marketing-1725340_1280.jpg',
+    
     bestSeller: true,
     new: false,
     isPublished: true,
-    previewVideo: 'https://www.example.com/preview-digital-marketing.mp4',
+    // previewVideo: 'https://www.example.com/preview-digital-marketing.mp4',
     courseContent: [
       {
         chapterId: 'dm_chap1',
@@ -312,24 +318,25 @@ const courses = [
       { userId: 'user_2jJjK89CoDbL8I4iFq0TuV5', rating: 4, _id: '67keg4k5j3pn3nnggg161657' }
     ],
     createdAt: '2024-06-18T14:50:00.000Z',
-    updatedAt: '2025-02-05T13:10:05.000Z'
+    updatedAt: '2025-02-05T13:10:05.000Z',
+    image: 'https://cdn.pixabay.com/photo/2016/10/09/08/32/digital-marketing-1725340_1280.jpg',
   },
   {
     id: 8,
     title: 'Photography Masterclass',
     courseDescription: "<h2>Capture Stunning Photos</h2><p>From camera fundamentals to composition techniques, this course will help you elevate your photography skills. Ideal for hobbyists and aspiring professionals.</p><ul><li>Camera settings and modes</li><li>Lighting and composition</li><li>Post-processing workflow</li></ul>",
     instructor: 'David Wilson',
-    rating: 4.8,
+    // rating: 4.8,
     reviews: 1000,
     price: 89.99,
     discount: 5,
     category: 'Photography',
     duration: 25,
-    image: 'https://cdn.pixabay.com/photo/2016/09/14/08/18/film-1668918_960_720.jpg',
+   
     bestSeller: false,
     new: true,
     isPublished: true,
-    previewVideo: 'https://www.example.com/preview-photography.mp4',
+    // previewVideo: 'https://www.example.com/preview-photography.mp4',
     courseContent: [
       {
         chapterId: 'photo_chap1',
@@ -357,98 +364,101 @@ const courses = [
       { userId: 'user_5mMmN23FoEcP2L8jIq3WrX4', rating: 4, _id: '67mfg6m7m5rs5sstii181879' }
     ],
     createdAt: '2024-05-23T09:25:00.000Z',
-    updatedAt: '2025-03-18T15:55:55.000Z'
+    updatedAt: '2025-03-18T15:55:55.000Z',
+     image: 'https://cdn.pixabay.com/photo/2016/09/14/08/18/film-1668918_960_720.jpg',
   },
-  {
-    id: 9,
-    title: 'Financial Analysis and Modeling',
-    courseDescription: "<h2>Financial Modeling Techniques</h2><p>Gain practical skills in financial analysis and Excel modeling. This course covers ratio analysis, forecasting, and valuation models.</p><ul><li>Excel for finance professionals</li><li>Creating dynamic financial models</li><li>Business valuation methods</li></ul>",
-    instructor: 'Olivia Brown',
-    rating: 4.7,
-    reviews: 950,
-    price: 79.99,
-    discount: 15,
-    category: 'Finance',
-    duration:38,
-    image: 'https://cdn.pixabay.com/photo/2016/08/06/17/34/office-1574717_960_720.jpg',
-    bestSeller: false,
-    new: false,
-    isPublished: true,
-    previewVideo: 'https://www.example.com/preview-finance.mp4',
-    courseContent: [
-      {
-        chapterId: 'fin_chap1',
-        chapterOrder: 1,
-        chapterTitle: 'Excel Foundations',
-        chapterContent: [
-          { lectureId: 'fin_lec1', lectureTitle: 'Advanced Excel Functions', lectureDuration: 20, lectureUrl: 'https://youtu.be/fin1', isPreviewFree: true, lectureOrder: 1 },
-          { lectureId: 'fin_lec2', lectureTitle: 'Pivot Tables and Charts', lectureDuration: 24, lectureUrl: 'https://youtu.be/fin2', isPreviewFree: false, lectureOrder: 2 }
-        ]
-      },
-      {
-        chapterId: 'fin_chap2',
-        chapterOrder: 2,
-        chapterTitle: 'Modeling and Valuation',
-        chapterContent: [
-          { lectureId: 'fin_lec3', lectureTitle: 'Building Forecast Models', lectureDuration: 30, lectureUrl: 'https://youtu.be/fin3', isPreviewFree: true, lectureOrder: 1 },
-          { lectureId: 'fin_lec4', lectureTitle: 'Valuation Techniques', lectureDuration: 28, lectureUrl: 'https://youtu.be/fin4', isPreviewFree: false, lectureOrder: 2 }
-        ]
-      }
-    ],
-    educator: 'e458i9d0a78j59iec l9h0j12',
-    enrolledStudents: ['user_7oOpQ45HrIvS4N1lKs5VuY6','user_8pPpR56IsJwT5O2mLt6WvZ7','user_9qQqS67JtKxU6P3nMu7XpA8'],
-    courseRatings: [
-      { userId: 'user_7oOpQ45HrIvS4N1lKs5VuY6', rating: 4, _id: '67ogf7o8n6st6ttu jj191980' },
-      { userId: 'user_8pPpR56IsJwT5O2mLt6WvZ7', rating: 5, _id: '67phg8p9o7tu7uuvkk201091' }
-    ],
-    createdAt: '2024-04-14T08:15:00.000Z',
-    updatedAt: '2025-01-22T12:30:25.000Z'
-  },
-  {
-    id: 10,
-    title: 'Project Management Professional',
-    courseDescription: "<h2>Lead Projects to Success</h2><p>Prepare for the PMP exam and learn best practices in project planning, execution, and monitoring. Gain skills to lead projects effectively.</p><ul><li>Project lifecycle and methodologies</li><li>Risk management and quality assurance</li><li>Stakeholder communication</li></ul>",
-    instructor: 'Daniel Garcia',
-    rating: 4.5,
-    reviews: 720,
-    price: 89.99,
-    discount: 20,
-    category: 'Management',
-    duration: 40,
-    image: 'https://cdn.pixabay.com/photo/2019/02/26/09/09/clock-4021494_960_720.jpg',
-    bestSeller: true,
-    new: false,
-    isPublished: true,
-    previewVideo: 'https://www.example.com/preview-pmp.mp4',
-    courseContent: [
-      {
-        chapterId: 'pmp_chap1',
-        chapterOrder: 1,
-        chapterTitle: 'Project Initiation and Planning',
-        chapterContent: [
-          { lectureId: 'pmp_lec1', lectureTitle: 'Project Charter Development', lectureDuration: 22, lectureUrl: 'https://youtu.be/pmp1', isPreviewFree: true, lectureOrder: 1 },
-          { lectureId: 'pmp_lec2', lectureTitle: 'Scope and Schedule Management', lectureDuration: 26, lectureUrl: 'https://youtu.be/pmp2', isPreviewFree: false, lectureOrder: 2 }
-        ]
-      },
-      {
-        chapterId: 'pmp_chap2',
-        chapterOrder: 2,
-        chapterTitle: 'Execution, Monitoring, and Closing',
-        chapterContent: [
-          { lectureId: 'pmp_lec3', lectureTitle: 'Quality and Risk Management', lectureDuration: 28, lectureUrl: 'https://youtu.be/pmp3', isPreviewFree: true, lectureOrder: 1 },
-          { lectureId: 'pmp_lec4', lectureTitle: 'Closing and Lessons Learned', lectureDuration: 24, lectureUrl: 'https://youtu.be/pmp4', isPreviewFree: false, lectureOrder: 2 }
-        ]
-      }
-    ],
-    educator: 'f569j0e1b89k6a2jcl0i1k54',
-    enrolledStudents: ['user_0rRrS78KsIvV7O4pMt8WwX9','user_1sSsT89LtJwW8P5qNu9XyY1','user_2tTtU90MuKyX9R6rOv0YzZ2'],
-    courseRatings: [
-      { userId: 'user_0rRrS78KsIvV7O4pMt8WwX9', rating: 5, _id: '67qi h9q0l8uv8vvll221192' },
-      { userId: 'user_1sSsT89LtJwW8P5qNu9XyY1', rating: 4, _id: '67rj i0r1m9vw9wwmm241203' }
-    ],
-    createdAt: '2024-03-10T15:40:00.000Z',
-    updatedAt: '2025-02-28T17:05:35.000Z'
-  }
+  // {
+  //   id: 9,
+  //   title: 'Financial Analysis and Modeling',
+  //   courseDescription: "<h2>Financial Modeling Techniques</h2><p>Gain practical skills in financial analysis and Excel modeling. This course covers ratio analysis, forecasting, and valuation models.</p><ul><li>Excel for finance professionals</li><li>Creating dynamic financial models</li><li>Business valuation methods</li></ul>",
+  //   instructor: 'Olivia Brown',
+  //   rating: 4.7,
+  //   reviews: 950,
+  //   price: 79.99,
+  //   discount: 15,
+  //   category: 'Finance',
+  //   duration:38,
+   
+  //   bestSeller: false,
+  //   new: false,
+  //   isPublished: true,
+  //   // previewVideo: 'https://www.example.com/preview-finance.mp4',
+  //   courseContent: [
+  //     {
+  //       chapterId: 'fin_chap1',
+  //       chapterOrder: 1,
+  //       chapterTitle: 'Excel Foundations',
+  //       chapterContent: [
+  //         { lectureId: 'fin_lec1', lectureTitle: 'Advanced Excel Functions', lectureDuration: 20, lectureUrl: 'https://youtu.be/fin1', isPreviewFree: true, lectureOrder: 1 },
+  //         { lectureId: 'fin_lec2', lectureTitle: 'Pivot Tables and Charts', lectureDuration: 24, lectureUrl: 'https://youtu.be/fin2', isPreviewFree: false, lectureOrder: 2 }
+  //       ]
+  //     },
+  //     {
+  //       chapterId: 'fin_chap2',
+  //       chapterOrder: 2,
+  //       chapterTitle: 'Modeling and Valuation',
+  //       chapterContent: [
+  //         { lectureId: 'fin_lec3', lectureTitle: 'Building Forecast Models', lectureDuration: 30, lectureUrl: 'https://youtu.be/fin3', isPreviewFree: true, lectureOrder: 1 },
+  //         { lectureId: 'fin_lec4', lectureTitle: 'Valuation Techniques', lectureDuration: 28, lectureUrl: 'https://youtu.be/fin4', isPreviewFree: false, lectureOrder: 2 }
+  //       ]
+  //     }
+  //   ],
+  //   educator: 'e458i9d0a78j59iec l9h0j12',
+  //   enrolledStudents: ['user_7oOpQ45HrIvS4N1lKs5VuY6','user_8pPpR56IsJwT5O2mLt6WvZ7','user_9qQqS67JtKxU6P3nMu7XpA8'],
+  //   courseRatings: [
+  //     { userId: 'user_7oOpQ45HrIvS4N1lKs5VuY6', rating: 4, _id: '67ogf7o8n6st6ttu jj191980' },
+  //     { userId: 'user_8pPpR56IsJwT5O2mLt6WvZ7', rating: 5, _id: '67phg8p9o7tu7uuvkk201091' }
+  //   ],
+  //   createdAt: '2024-04-14T08:15:00.000Z',
+  //   updatedAt: '2025-01-22T12:30:25.000Z',
+  //    image: 'https://cdn.pixabay.com/photo/2016/08/06/17/34/office-1574717_960_720.jpg',
+  // },
+  // {
+  //   id: 10,
+  //   title: 'Project Management Professional',
+  //   courseDescription: "<h2>Lead Projects to Success</h2><p>Prepare for the PMP exam and learn best practices in project planning, execution, and monitoring. Gain skills to lead projects effectively.</p><ul><li>Project lifecycle and methodologies</li><li>Risk management and quality assurance</li><li>Stakeholder communication</li></ul>",
+  //   instructor: 'Daniel Garcia',
+  //   rating: 4.5,
+  //   reviews: 720,
+  //   price: 89.99,
+  //   discount: 20,
+  //   category: 'Management',
+  //   duration: 40,
+    
+  //   bestSeller: true,
+  //   new: false,
+  //   isPublished: true,
+  //   // previewVideo: 'https://www.example.com/preview-pmp.mp4',
+  //   courseContent: [
+  //     {
+  //       chapterId: 'pmp_chap1',
+  //       chapterOrder: 1,
+  //       chapterTitle: 'Project Initiation and Planning',
+  //       chapterContent: [
+  //         { lectureId: 'pmp_lec1', lectureTitle: 'Project Charter Development', lectureDuration: 22, lectureUrl: 'https://youtu.be/pmp1', isPreviewFree: true, lectureOrder: 1 },
+  //         { lectureId: 'pmp_lec2', lectureTitle: 'Scope and Schedule Management', lectureDuration: 26, lectureUrl: 'https://youtu.be/pmp2', isPreviewFree: false, lectureOrder: 2 }
+  //       ]
+  //     },
+  //     {
+  //       chapterId: 'pmp_chap2',
+  //       chapterOrder: 2,
+  //       chapterTitle: 'Execution, Monitoring, and Closing',
+  //       chapterContent: [
+  //         { lectureId: 'pmp_lec3', lectureTitle: 'Quality and Risk Management', lectureDuration: 28, lectureUrl: 'https://youtu.be/pmp3', isPreviewFree: true, lectureOrder: 1 },
+  //         { lectureId: 'pmp_lec4', lectureTitle: 'Closing and Lessons Learned', lectureDuration: 24, lectureUrl: 'https://youtu.be/pmp4', isPreviewFree: false, lectureOrder: 2 }
+  //       ]
+  //     }
+  //   ],
+  //   educator: 'f569j0e1b89k6a2jcl0i1k54',
+  //   enrolledStudents: ['user_0rRrS78KsIvV7O4pMt8WwX9','user_1sSsT89LtJwW8P5qNu9XyY1','user_2tTtU90MuKyX9R6rOv0YzZ2'],
+  //   courseRatings: [
+  //     { userId: 'user_0rRrS78KsIvV7O4pMt8WwX9', rating: 5, _id: '67qi h9q0l8uv8vvll221192' },
+  //     { userId: 'user_1sSsT89LtJwW8P5qNu9XyY1', rating: 4, _id: '67rj i0r1m9vw9wwmm241203' }
+  //   ],
+  //   createdAt: '2024-03-10T15:40:00.000Z',
+  //   updatedAt: '2025-02-28T17:05:35.000Z',
+  //   image: 'https://cdn.pixabay.com/photo/2019/02/26/09/09/clock-4021494_960_720.jpg',
+  // }
 ];
 
 export default courses;

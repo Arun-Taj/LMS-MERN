@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState,useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   FaStar,
@@ -13,6 +13,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../context/AuthContext";
 
+
 const CourseDetails = () => {
   const { id } = useParams();
   const {
@@ -24,20 +25,31 @@ const CourseDetails = () => {
     averageRating,
     enrolledCount,
     discountedPrice,
-    enrollCourse, // ← expose it
+    enrollCourse,
+    user,
   } = useAuth();
 
   const [selectedVideo, setSelectedVideo] = useState("");
   const [isEnrolled, setIsEnrolled] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [playerData, setPlayerData] = useState(null);
 
-  // On mount or when `id` changes, pick the course and set it in context
+   const cardRating = useMemo(
+      () => averageRating(course),
+      [averageRating, course]
+    );
+
   useEffect(() => {
     const found = allCourses.find((c) => c.id === parseInt(id, 10));
     if (found) {
       setSelectedCourse(found);
-      setSelectedVideo(found.courseContent[0]?.lectureUrl || "");
+      const firstPreview = found.courseContent
+        .flatMap((ch) => ch.chapterContent)
+        .find((lec) => lec.isPreviewFree);
+      setSelectedVideo(firstPreview?.lectureUrl || "");
+      setIsEnrolled(user && found.enrolledStudents?.includes(user._id));
     }
-  }, [allCourses, id, setSelectedCourse]);
+  }, [allCourses, id, setSelectedCourse, user]);
 
   if (!course) {
     return (
@@ -46,6 +58,26 @@ const CourseDetails = () => {
       </div>
     );
   }
+
+  const getEmbedUrl = (url) => {
+    if (url.includes("youtu.be/")) {
+      const id = url.split("youtu.be/")[1];
+      return `https://www.youtube.com/embed/${id}`;
+    }
+    if (url.includes("watch?v=")) {
+      return url.replace("watch?v=", "embed/");
+    }
+    return url;
+  };
+
+  const handleEnroll = async () => {
+    if (user && !isEnrolled) {
+      await enrollCourse(course.id);
+      setIsEnrolled(true);
+    }
+  };
+
+  const isYouTube = selectedVideo.includes("youtu");
 
   return (
     <div className="container mx-auto px-6 py-8 max-w-7xl">
@@ -57,46 +89,10 @@ const CourseDetails = () => {
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Video + Content */}
+        {/* Main Content */}
         <div className="lg:col-span-2 space-y-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="relative w-full rounded-xl overflow-hidden shadow-lg aspect-video"
-          >
-            {selectedVideo ? (
-              <video
-                key={selectedVideo}
-                src={selectedVideo}
-                poster={course.image}
-                controls
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="flex items-center justify-center w-full h-full bg-gray-200">
-                <p className="text-gray-500">No preview available</p>
-              </div>
-            )}
-            {!isEnrolled && selectedVideo && (
-              <button
-              onClick={() => {
-                       enrollCourse(course.id);
-                       // Optional: re‑fetch or reset selectedCourse so UI updates immediately
-                       setSelectedCourse({
-                         ...course,
-                         enrolledStudents: [...course.enrolledStudents, user._id]
-                       });
-                     }}
-                className="absolute bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-green-700 transition"
-              >
-                Enroll Now
-              </button>
-            )}
-          </motion.div>
-
           <div className="space-y-6">
-            {/* Header: Title, Rating, Students, Date */}
+            {/* Header */}
             <motion.header
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -118,16 +114,28 @@ const CourseDetails = () => {
               </h1>
               <div className="flex flex-wrap items-center text-gray-500 gap-4">
                 <div className="flex items-center">
-                  <FaStar className="text-yellow-500 mr-1" /> {averageRating} (
-                  {course.reviews} reviews)
-                </div>
+                            <div className="flex text-yellow-400">
+                              {[...Array(5)].map((_, i) => (
+                                <FaStar
+                                  key={i}
+                                  className={
+                                    i < Math.floor(cardRating) ? 'fill-current' : 'fill-gray-300'
+                                  }
+                                />
+                              ))}
+                            </div>
+                            <span className="ml-2 text-sm text-gray-600">
+                              {cardRating} ({course.reviews.toLocaleString()})
+                            </span>
+                          </div>
                 <div className="flex items-center">
                   <FaUsers className="mr-1" /> {enrolledCount} students
                 </div>
                 <div className="flex items-center">
-                  <FaCalendarAlt className="mr-1" />{" "}
+                  <FaCalendarAlt className="mr-1" />
                   {new Date(course.createdAt).toLocaleDateString()}
                 </div>
+                <div className="flex items-center">By <span className="font-bold">{course.instructor}</span></div>
                 {!course.isPublished && (
                   <span className="px-2 py-1 bg-red-100 text-red-700 text-sm rounded">
                     Draft
@@ -136,7 +144,7 @@ const CourseDetails = () => {
               </div>
             </motion.header>
 
-            {/* About Section */}
+            {/* About */}
             <motion.section
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -179,10 +187,12 @@ const CourseDetails = () => {
                       {ch.chapterContent.map((lec) => (
                         <li
                           key={lec.lectureId}
-                          onClick={() =>
-                            lec.isPreviewFree &&
-                            setSelectedVideo(lec.lectureUrl)
-                          }
+                          onClick={() => {
+                            if (lec.isPreviewFree) {
+                              setSelectedVideo(lec.lectureUrl);
+                              setIsVideoPlaying(false);
+                            }
+                          }}
                           className={`flex justify-between items-center p-3 rounded-lg hover:bg-gray-100 transition ${
                             lec.isPreviewFree ? "cursor-pointer" : "opacity-50"
                           }`}
@@ -210,8 +220,25 @@ const CourseDetails = () => {
           </div>
         </div>
 
-        {/* Sidebar */}
+        {/* Sidebar with Video Preview */}
         <aside className="space-y-8 sticky top-20">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="relative w-full rounded-xl overflow-hidden shadow-lg aspect-video bg-black"
+          >
+             
+             <img
+              src={course.image}
+              alt={course.title}
+              className=""
+            />
+
+            
+           
+          </motion.div>
+
           {/* Purchase Card */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -224,44 +251,23 @@ const CourseDetails = () => {
               <span className="text-3xl font-bold text-gray-900">
                 ${discountedPrice}
               </span>
-              <span className="text-sm text-gray-500 line-through">
-                ${course.price.toFixed(2)}
-              </span>
+              {course.discount > 0 && (
+                <span className="text-sm text-gray-500 line-through">
+                  ${course.price.toFixed(2)}
+                </span>
+              )}
             </div>
             <button
-              onClick={() => setIsEnrolled(true)}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition"
+              onClick={handleEnroll}
+              disabled={isEnrolled}
+              className={`w-full py-3 rounded-lg cursor-pointer font-semibold transition ${
+                isEnrolled
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700 text-white"
+              }`}
             >
-              {isEnrolled ? "Enrolled" : "Enroll Now"}
+              {isEnrolled ? "Already Enrolled" : "Enroll Now"}
             </button>
-          </motion.div>
-
-          {/* Instructor Card */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="border border-gray-200 rounded-2xl p-6 bg-white shadow-lg"
-          >
-            <h3 className="text-xl font-semibold mb-4">Instructor</h3>
-            <div className="flex items-center gap-4">
-              <img
-                src={
-                  course.instructorImage ||
-                  "https://cdn.pixabay.com/photo/2024/09/12/21/20/ai-generated-9043367_960_720.png"
-                }
-                alt={course.instructor}
-                className="w-16 h-16 rounded-full object-cover"
-              />
-              <div>
-                <p className="font-semibold text-gray-900">
-                  {course.instructor}
-                </p>
-                <p className="text-gray-500 text-sm mt-1">
-                  Senior Developer & Educator
-                </p>
-              </div>
-            </div>
           </motion.div>
 
           {/* Actions */}

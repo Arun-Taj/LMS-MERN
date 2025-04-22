@@ -1,9 +1,18 @@
-import React from 'react';
+import React,{useMemo} from 'react';
 import { Link } from 'react-router-dom';
 import { FaStar, FaRegClock } from 'react-icons/fa';
+import { useAuth } from '../../context/AuthContext';
 
 const CourseCard = ({ course }) => {
-  // Calculate the original price if a discount exists
+  // Calculate the original price if a discount exists\
+  const{averageRating}=useAuth()
+  // Compute this card’s own average rating
+  const cardRating = useMemo(
+    () => averageRating(course),
+    [averageRating, course]
+  );
+
+  
   const originalPrice =
     course.discount > 0 ? course.price / (1 - course.discount / 100) : course.price;
 
@@ -51,11 +60,11 @@ const CourseCard = ({ course }) => {
               {[...Array(5)].map((_, i) => (
                 <FaStar
                   key={i}
-                  className={i < Math.floor(course.rating) ? 'fill-current' : 'fill-gray-300'}
+                  className={i < Math.floor(cardRating) ? 'fill-current' : 'fill-gray-300'}
                 />
               ))}
             </div>
-            <span className="ml-2 text-sm text-gray-600">
+            <span className="ml-2 text-sm text-gray-600">{cardRating}
               ({course.reviews.toLocaleString()})
             </span>
           </div>
