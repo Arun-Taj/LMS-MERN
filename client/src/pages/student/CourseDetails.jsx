@@ -1,5 +1,9 @@
-import React, { useEffect, useState,useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
+import { CiYoutube } from "react-icons/ci";
+import YouTube from "react-youtube";
+import { MdAccessTime } from "react-icons/md";
+
 import {
   FaStar,
   FaChevronRight,
@@ -11,8 +15,8 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaExpand, FaCompress } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
-
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -33,11 +37,11 @@ const CourseDetails = () => {
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [playerData, setPlayerData] = useState(null);
-
-   const cardRating = useMemo(
-      () => averageRating(course),
-      [averageRating, course]
-    );
+  const [isMaximized, setIsMaximized] = useState(false);
+  const cardRating = useMemo(
+    () => averageRating(course),
+    [averageRating, course]
+  );
 
   useEffect(() => {
     const found = allCourses.find((c) => c.id === parseInt(id, 10));
@@ -114,20 +118,22 @@ const CourseDetails = () => {
               </h1>
               <div className="flex flex-wrap items-center text-gray-500 gap-4">
                 <div className="flex items-center">
-                            <div className="flex text-yellow-400">
-                              {[...Array(5)].map((_, i) => (
-                                <FaStar
-                                  key={i}
-                                  className={
-                                    i < Math.floor(cardRating) ? 'fill-current' : 'fill-gray-300'
-                                  }
-                                />
-                              ))}
-                            </div>
-                            <span className="ml-2 text-sm text-gray-600">
-                              {cardRating} ({course.reviews.toLocaleString()})
-                            </span>
-                          </div>
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <FaStar
+                        key={i}
+                        className={
+                          i < Math.floor(cardRating)
+                            ? "fill-current"
+                            : "fill-gray-300"
+                        }
+                      />
+                    ))}
+                  </div>
+                  <span className="ml-2 text-sm text-gray-600">
+                    {cardRating} ({course.reviews.toLocaleString()})
+                  </span>
+                </div>
                 <div className="flex items-center">
                   <FaUsers className="mr-1" /> {enrolledCount} students
                 </div>
@@ -135,7 +141,9 @@ const CourseDetails = () => {
                   <FaCalendarAlt className="mr-1" />
                   {new Date(course.createdAt).toLocaleDateString()}
                 </div>
-                <div className="flex items-center">By <span className="font-bold">{course.instructor}</span></div>
+                <div className="flex items-center">
+                  By <span className="font-bold">{course.instructor}</span>
+                </div>
                 {!course.isPublished && (
                   <span className="px-2 py-1 bg-red-100 text-red-700 text-sm rounded">
                     Draft
@@ -189,8 +197,8 @@ const CourseDetails = () => {
                           key={lec.lectureId}
                           onClick={() => {
                             if (lec.isPreviewFree) {
-                              setSelectedVideo(lec.lectureUrl);
-                              setIsVideoPlaying(false);
+                             setPlayerData({videoId:lec.lectureUrl.split('/').pop()});
+                              // setIsVideoPlaying(false);
                             }
                           }}
                           className={`flex justify-between items-center p-3 rounded-lg hover:bg-gray-100 transition ${
@@ -226,17 +234,14 @@ const CourseDetails = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
-            className="relative w-full rounded-xl overflow-hidden shadow-lg aspect-video bg-black"
+           className="relative w-full h-96 rounded-xl overflow-hidden shadow-lg bg-black"
           >
-             
-             <img
-              src={course.image}
-              alt={course.title}
-              className=""
-            />
-
             
-           
+            
+              {playerData ? <YouTube  videoId={playerData.videoId} opts={{playerVars:{autoplay:1}}} iframeClassName='w-full aspect-video'/>:<img src={course.image} alt={course.title} className="" />}
+          
+              
+
           </motion.div>
 
           {/* Purchase Card */}
