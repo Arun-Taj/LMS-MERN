@@ -367,98 +367,93 @@ const courses = [
     updatedAt: '2025-03-18T15:55:55.000Z',
      image: 'https://cdn.pixabay.com/photo/2016/09/14/08/18/film-1668918_960_720.jpg',
   },
-  // {
-  //   id: 9,
-  //   title: 'Financial Analysis and Modeling',
-  //   courseDescription: "<h2>Financial Modeling Techniques</h2><p>Gain practical skills in financial analysis and Excel modeling. This course covers ratio analysis, forecasting, and valuation models.</p><ul><li>Excel for finance professionals</li><li>Creating dynamic financial models</li><li>Business valuation methods</li></ul>",
-  //   instructor: 'Olivia Brown',
-  //   rating: 4.7,
-  //   reviews: 950,
-  //   price: 79.99,
-  //   discount: 15,
-  //   category: 'Finance',
-  //   duration:38,
-   
-  //   bestSeller: false,
-  //   new: false,
-  //   isPublished: true,
-  //   // previewVideo: 'https://www.example.com/preview-finance.mp4',
-  //   courseContent: [
-  //     {
-  //       chapterId: 'fin_chap1',
-  //       chapterOrder: 1,
-  //       chapterTitle: 'Excel Foundations',
-  //       chapterContent: [
-  //         { lectureId: 'fin_lec1', lectureTitle: 'Advanced Excel Functions', lectureDuration: 20, lectureUrl: 'https://youtu.be/fin1', isPreviewFree: true, lectureOrder: 1 },
-  //         { lectureId: 'fin_lec2', lectureTitle: 'Pivot Tables and Charts', lectureDuration: 24, lectureUrl: 'https://youtu.be/fin2', isPreviewFree: false, lectureOrder: 2 }
-  //       ]
-  //     },
-  //     {
-  //       chapterId: 'fin_chap2',
-  //       chapterOrder: 2,
-  //       chapterTitle: 'Modeling and Valuation',
-  //       chapterContent: [
-  //         { lectureId: 'fin_lec3', lectureTitle: 'Building Forecast Models', lectureDuration: 30, lectureUrl: 'https://youtu.be/fin3', isPreviewFree: true, lectureOrder: 1 },
-  //         { lectureId: 'fin_lec4', lectureTitle: 'Valuation Techniques', lectureDuration: 28, lectureUrl: 'https://youtu.be/fin4', isPreviewFree: false, lectureOrder: 2 }
-  //       ]
-  //     }
-  //   ],
-  //   educator: 'e458i9d0a78j59iec l9h0j12',
-  //   enrolledStudents: ['user_7oOpQ45HrIvS4N1lKs5VuY6','user_8pPpR56IsJwT5O2mLt6WvZ7','user_9qQqS67JtKxU6P3nMu7XpA8'],
-  //   courseRatings: [
-  //     { userId: 'user_7oOpQ45HrIvS4N1lKs5VuY6', rating: 4, _id: '67ogf7o8n6st6ttu jj191980' },
-  //     { userId: 'user_8pPpR56IsJwT5O2mLt6WvZ7', rating: 5, _id: '67phg8p9o7tu7uuvkk201091' }
-  //   ],
-  //   createdAt: '2024-04-14T08:15:00.000Z',
-  //   updatedAt: '2025-01-22T12:30:25.000Z',
-  //    image: 'https://cdn.pixabay.com/photo/2016/08/06/17/34/office-1574717_960_720.jpg',
-  // },
-  // {
-  //   id: 10,
-  //   title: 'Project Management Professional',
-  //   courseDescription: "<h2>Lead Projects to Success</h2><p>Prepare for the PMP exam and learn best practices in project planning, execution, and monitoring. Gain skills to lead projects effectively.</p><ul><li>Project lifecycle and methodologies</li><li>Risk management and quality assurance</li><li>Stakeholder communication</li></ul>",
-  //   instructor: 'Daniel Garcia',
-  //   rating: 4.5,
-  //   reviews: 720,
-  //   price: 89.99,
-  //   discount: 20,
-  //   category: 'Management',
-  //   duration: 40,
-    
-  //   bestSeller: true,
-  //   new: false,
-  //   isPublished: true,
-  //   // previewVideo: 'https://www.example.com/preview-pmp.mp4',
-  //   courseContent: [
-  //     {
-  //       chapterId: 'pmp_chap1',
-  //       chapterOrder: 1,
-  //       chapterTitle: 'Project Initiation and Planning',
-  //       chapterContent: [
-  //         { lectureId: 'pmp_lec1', lectureTitle: 'Project Charter Development', lectureDuration: 22, lectureUrl: 'https://youtu.be/pmp1', isPreviewFree: true, lectureOrder: 1 },
-  //         { lectureId: 'pmp_lec2', lectureTitle: 'Scope and Schedule Management', lectureDuration: 26, lectureUrl: 'https://youtu.be/pmp2', isPreviewFree: false, lectureOrder: 2 }
-  //       ]
-  //     },
-  //     {
-  //       chapterId: 'pmp_chap2',
-  //       chapterOrder: 2,
-  //       chapterTitle: 'Execution, Monitoring, and Closing',
-  //       chapterContent: [
-  //         { lectureId: 'pmp_lec3', lectureTitle: 'Quality and Risk Management', lectureDuration: 28, lectureUrl: 'https://youtu.be/pmp3', isPreviewFree: true, lectureOrder: 1 },
-  //         { lectureId: 'pmp_lec4', lectureTitle: 'Closing and Lessons Learned', lectureDuration: 24, lectureUrl: 'https://youtu.be/pmp4', isPreviewFree: false, lectureOrder: 2 }
-  //       ]
-  //     }
-  //   ],
-  //   educator: 'f569j0e1b89k6a2jcl0i1k54',
-  //   enrolledStudents: ['user_0rRrS78KsIvV7O4pMt8WwX9','user_1sSsT89LtJwW8P5qNu9XyY1','user_2tTtU90MuKyX9R6rOv0YzZ2'],
-  //   courseRatings: [
-  //     { userId: 'user_0rRrS78KsIvV7O4pMt8WwX9', rating: 5, _id: '67qi h9q0l8uv8vvll221192' },
-  //     { userId: 'user_1sSsT89LtJwW8P5qNu9XyY1', rating: 4, _id: '67rj i0r1m9vw9wwmm241203' }
-  //   ],
-  //   createdAt: '2024-03-10T15:40:00.000Z',
-  //   updatedAt: '2025-02-28T17:05:35.000Z',
-  //   image: 'https://cdn.pixabay.com/photo/2019/02/26/09/09/clock-4021494_960_720.jpg',
-  // }
+ 
 ];
 
 export default courses;
+
+export const dummyDashboardData = {
+  "totalEarnings": 707.38,
+  "enrolledStudentsData": [
+      {
+          "courseTitle": "Introduction to JavaScript",
+          "student": {
+              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "name": "Great Stack",
+              "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+          }
+      },
+      {
+          "courseTitle": "Advanced Python Programming",
+          "student": {
+              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "name": "Great Stack",
+              "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+          }
+      },
+      {
+          "courseTitle": "Web Development Bootcamp",
+          "student": {
+              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "name": "Great Stack",
+              "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+          }
+      },
+      {
+          "courseTitle": "Data Science with Python",
+          "student": {
+              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "name": "Great Stack",
+              "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+          }
+      },
+      {
+          "courseTitle": "Cybersecurity Basics",
+          "student": {
+              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "name": "Great Stack",
+              "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+          }
+      }
+  ],
+  "totalCourses": 8
+}
+
+export const dummyStudentEnrolled = [
+  {
+      "student": {
+          "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+          "name": "GreatStack",
+          "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+      },
+      "courseTitle": "Introduction to JavaScript",
+      "purchaseDate": "2024-12-20T08:39:55.509Z"
+  },
+  {
+      "student": {
+          "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+          "name": "GreatStack",
+          "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+      },
+      "courseTitle": "Introduction to JavaScript",
+      "purchaseDate": "2024-12-20T08:59:49.964Z"
+  },
+  {
+      "student": {
+          "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+          "name": "GreatStack",
+          "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+      },
+      "courseTitle": "Advanced Python Programming",
+      "purchaseDate": "2024-12-20T11:03:42.931Z"
+  },
+  {
+      "student": {
+          "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+          "name": "GreatStack",
+          "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+      },
+      "courseTitle": "Web Development Bootcamp",
+      "purchaseDate": "2024-12-20T11:04:48.798Z"
+  }
+]
