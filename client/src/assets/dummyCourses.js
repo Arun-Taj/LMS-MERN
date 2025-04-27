@@ -378,42 +378,52 @@ export const dummyDashboardData = {
       {
           "courseTitle": "Introduction to JavaScript",
           "student": {
-              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "_id": "101",
               "name": "Great Stack",
+              "email":"demo@gmail.com",
               "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-          }
+          },
+          "purchaseDate": "2024-12-20T08:39:55.509Z"
       },
       {
           "courseTitle": "Advanced Python Programming",
           "student": {
-              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "_id": "102",
               "name": "Great Stack",
+              "email":"demo@gmail.com",
               "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-          }
+          },
+          "purchaseDate": "2024-12-20T08:39:55.509Z"
       },
       {
           "courseTitle": "Web Development Bootcamp",
           "student": {
-              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "_id": "103",
               "name": "Great Stack",
+              "email":"demo@gmail.com",
               "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-          }
+          },
+          "purchaseDate": "2024-12-20T08:39:55.509Z"
       },
       {
           "courseTitle": "Data Science with Python",
           "student": {
-              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "_id": "104",
               "name": "Great Stack",
+              "email":"demo@gmail.com",
               "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-          }
+          },
+          "purchaseDate": "2024-12-20T08:39:55.509Z"
       },
       {
           "courseTitle": "Cybersecurity Basics",
           "student": {
-              "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+              "_id": "105",
               "name": "Great Stack",
+              "email":"demo@gmail.com",
               "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-          }
+          },
+          "purchaseDate": "2024-12-20T08:39:55.509Z"
       }
   ],
   "totalCourses": 8
@@ -424,7 +434,8 @@ export const dummyStudentEnrolled = [
       "student": {
           "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
           "name": "GreatStack",
-          "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+          "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ",
+          
       },
       "courseTitle": "Introduction to JavaScript",
       "purchaseDate": "2024-12-20T08:39:55.509Z"
