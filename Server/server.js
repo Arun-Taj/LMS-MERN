@@ -13,7 +13,14 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.log(err));
 
 // Middlewares
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors({
+  credentials: true,
+  origin: [
+    'http://localhost:5173', 
+    'https://lms-mern-phi.vercel.app/'
+  ]
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
