@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
+  // _id:{
+  //   type:String,
+  //   required:true,
+  // },
   email: {
     type: String,
     required: true,
@@ -18,6 +22,21 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  imageUrl:{
+      type:String,
+      required:true,
+  },
+  enrolledCourses:[
+    {
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Course'
+    }
+  ],
+  role: {
+    type: [String],
+    enum: ['user', 'educator'],
+    default: ['user']
   }
 });
 

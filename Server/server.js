@@ -1,16 +1,23 @@
+
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/Routes');
-
+// const { cloudinary, connectCloudinary } = require('./config/cloudnary');
 const app = express();
+
+// Initialize Cloudinary
+// connectCloudinary();
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('DB connected'))
   .catch(err => console.log(err));
+
+
 
 // Middlewares
 app.use(cors({

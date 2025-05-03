@@ -3,14 +3,14 @@ const jwt = require('jsonwebtoken');
 
 exports.signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    const user = await User.create({ name, email, password });
+    const { name, email, password,imageUrl } = req.body;
+    const user = await User.create({ name, email, password,imageUrl });
     
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id, role:user.role }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN
     });
 
-    res.status(201).json({ token, user: { id: user._id, name, email } });
+    res.status(201).json({ token, user: { id: user._id, name, email,imageUrl } });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -29,7 +29,7 @@ exports.login = async (req, res) => {
       expiresIn: process.env.JWT_EXPIRES_IN
     });
 
-    res.json({ token, user: { id: user._id, name: user.name, email } });
+    res.json({ token, user: { id: user._id, name: user.name, email, role:user.role } });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -37,4 +37,21 @@ exports.login = async (req, res) => {
 
 exports.getMe = async (req, res) => {
   res.json(req.user);
+};
+
+
+// PUT /api/users/become-educator
+exports.becomeEducator = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    
+    if (!user.role.includes('educator')) {
+      user.role.push('educator');
+      await user.save();
+    }
+
+    res.json({ message: 'You are now an educator', role: user.role });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
