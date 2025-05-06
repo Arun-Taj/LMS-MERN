@@ -1,0 +1,48 @@
+[
+    {
+        "chapterId": "chapter-1",
+        "chapterOrder": "1",
+        "chapterTitle": "Getting Started with HTML",
+        "chapterContent": [
+            {
+                "lectureId": "lecture-1-1",
+                "lectureTitle": "Introduction to HTML",
+                "lectureDuration": "00:30:00",
+                "lectureUrl": "https://example.com/html-intro",
+                "isPreviewFree": true,
+                "lectureOrder": 1
+            },
+            {
+                "lectureId": "lecture-1-2",
+                "lectureTitle": "HTML Elements",
+                "lectureDuration": "00:45:00",
+                "lectureUrl": "https://example.com/html-elements",
+                "isPreviewFree": false,
+                "lectureOrder": 2
+            }
+        ]
+    },
+    {
+        "chapterId": "chapter-2",
+        "chapterOrder": "2",
+        "chapterTitle": "Styling with CSS",
+        "chapterContent": [
+            {
+                "lectureId": "lecture-2-1",
+                "lectureTitle": "Introduction to CSS",
+                "lectureDuration": "00:30:00",
+                "lectureUrl": "https://example.com/css-intro",
+                "isPreviewFree": true,
+                "lectureOrder": 1
+            },
+            {
+                "lectureId": "lecture-2-2",
+                "lectureTitle": "CSS Selectors",
+                "lectureDuration": "00:45:00",
+                "lectureUrl": "https://example.com/css-selectors",
+                "isPreviewFree": false,
+                "lectureOrder": 2
+            }
+        ]
+    }
+]

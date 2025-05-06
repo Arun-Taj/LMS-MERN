@@ -1,16 +1,18 @@
+import 'dotenv/config';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import authRoutes from './routes/Routes.js'; // Update import
+import courseRoutes from './routes/Routes.js'; // Assuming you created this as ESM
+import connectCloudinary from './config/cloudinary.js'; // Assuming this is also ESM
 
 
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const authRoutes = require('./routes/Routes');
-// const { cloudinary, connectCloudinary } = require('./config/cloudnary');
+
 const app = express();
 
 // Initialize Cloudinary
-// connectCloudinary();
+connectCloudinary();
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
@@ -33,6 +35,8 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', authRoutes);
+// app.use('/become-educator',authRoutes)
+app.use('/api', courseRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
