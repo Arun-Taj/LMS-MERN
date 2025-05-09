@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String,
-    required: true,
+    // required: true,
   },
   enrolledCourses: [{
     type: mongoose.Schema.Types.ObjectId,
