@@ -8,10 +8,11 @@ import React, {
 import { getMe } from "../components/services/api";
 import dummyCourses from "../assets/dummyCourses";
 import { useNavigate } from "react-router-dom";
+import { becomeEducator as apiBecomeEducator } from "../components/services/api";
 
 export const AuthContext = createContext();
 
-export const AuthContextProvider = (props) => {
+export const AuthContextProvider = (props) => { 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -45,9 +46,29 @@ export const AuthContextProvider = (props) => {
     setUser(null);
   };
 
+// const becomeEducator = async () => {
+//   const token = localStorage.getItem("token");
+//   if (!token) throw new Error("No auth token");
+
+//   // call backend
+//   const { data } = await apiBecomeEducator(token);
+
+//   // `data.user` now has isEducator: true
+//   setUser(data.user);
+// };
+const becomeEducator = async () => {
+   const { data } = await apiBecomeEducator();
+    setUser(data.data.user);                      // update the user object
+  localStorage.setItem('token', data.data.token);
+    return data;
+};
+
+
+
+
   const [allCourses, setAllCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [isEducator,setIsEducator]=useState(true)
+  // const [isEducator,setIsEducator]=useState(true)
   const [enrolledCourses,setEnrolledCourses]=useState([])
 
   const fetchUserEnrolledCourse =async()=>{
@@ -136,7 +157,8 @@ export const AuthContextProvider = (props) => {
 
   const value = {
     user,
-    setIsEducator,
+    // setIsEducator,
+    becomeEducator,
     navigate,
     loading,
     allCourses,

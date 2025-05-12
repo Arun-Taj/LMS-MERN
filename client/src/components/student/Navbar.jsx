@@ -1,14 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HiMenu, HiX, HiSearch } from "react-icons/hi";
 
 import Logo from "../../assets/Logo.png";
 import { AuthContext } from "../../context/AuthContext";
+import { becomeEducator } from "../services/api";
+import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const { user, logout } = useContext(AuthContext);
+   const { becomeEducator } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
@@ -24,8 +27,30 @@ const Navbar = () => {
     }
   };
 
+ // Log role whenever `user` changes
+  useEffect(() => {
+    if (user) {
+      console.log("Navbar sees user.role:", user.role);
+    }
+  }, [user]);
+
+
+
+const handleBecomeEducator = async () => {
+  if (!window.confirm("Are you sure you want to become an educator?")) return;
+    try {
+      const res = await becomeEducator();          // res === { success, message, data }
+    alert(res.message);                             // <-- show the backend’s “You can now publish courses”
+    navigate('/educator');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to become educator');
+    }
+  };
+
+
   return (
-    <nav className="bg-white shadow-md py-3 sticky top-0 z-50">
+      <nav className="bg-white shadow-md py-3 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 ">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -63,12 +88,21 @@ const Navbar = () => {
           {/* Desktop Navigation Items */}
           {user && (
             <div className="hidden md:flex items-center space-x-6">
-              <Link
-                to="/educator"
-                className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
-              >
-                Become Educator
-              </Link>
+              {!user.role?.includes('educator') ? (
+                <button
+                  onClick={handleBecomeEducator}
+                  className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
+                >
+                  Become Educator
+                </button>
+              ) : (
+                <Link
+                  to="/educator"
+                  className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
+                >
+                  Educator Dashboard
+                </Link>
+              )}
               <Link
                 to="/myEnrollment"
                 className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
@@ -142,34 +176,49 @@ const Navbar = () => {
           <div className="px-4 pb-4 space-y-2 border-t border-gray-200">
             {user ? (
               <>
-                <Link
-                  to="/educator"
-                  onClick={toggleMobileMenu}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  Become Educator
-                </Link>
+                {!user.role.includes('educator') ? (
+                  <button
+                    onClick={handleBecomeEducator}
+                    className="block px-4 py-2 text-sm"
+                  >
+                    Become Educator
+                  </button>
+                ) : (
+                  <Link
+                    to="/educator"
+                    onClick={toggleMobileMenu}
+                    className="block px-4 py-2 text-sm"
+                  >
+                    Educator Dashboard
+                  </Link>
+                )}
                 <Link
                   to="/myEnrollment"
                   onClick={toggleMobileMenu}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  className="block px-4 py-2 text-sm"
                 >
                   Student
                 </Link>
+                <button
+                  onClick={logout}
+                  className="block px-4 py-2 text-sm"
+                >
+                  Logout
+                </button>
               </>
             ) : (
               <>
                 <Link
                   to="/login"
                   onClick={toggleMobileMenu}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  className="block px-4 py-2 text-sm"
                 >
                   Log In
                 </Link>
                 <Link
                   to="/signup"
                   onClick={toggleMobileMenu}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  className="block px-4 py-2 text-sm"
                 >
                   Sign Up
                 </Link>
