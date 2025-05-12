@@ -10,7 +10,7 @@ export const signup = async (req, res) => {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
-    res.status(201).json({ token, user: { id: user._id, name, email, imageUrl } });
+    res.status(201).json({ token, user: { id: user._id, name, email, imageUrl, role: user.role  } });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
